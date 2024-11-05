@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteo Total de Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #totalProductos {
+            font-size: 2em;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conteo Total de Productos</h1>
+    <p id="totalProductos">Cargando...</p>
+
+    <script>
+        // Función para obtener el conteo de productos desde la API
+        async function obtenerTotalProductos() {
+            try {
+                const response = await fetch('http://localhost:3000/api/totalProductos');
+                const data = await response.json();
+                document.getElementById('totalProductos').textContent = `Total de productos: ${data.total}`;
+            } catch (error) {
+                console.error('Error al obtener el total de productos:', error);
+                document.getElementById('totalProductos').textContent = 'Error al cargar los datos.';
+            }
+        }
+
+        // Llamar a la función al cargar la página
+        obtenerTotalProductos();
+    </script>
+</body>
+</html>

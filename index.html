@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balanceador AWS</title>
+</head>
+<body>
+    <nav>
+        <h1>Balanceador AWS</h1>
+    </nav>
+    <div class="contenido">
+        <div class="form-card">
+            <form id="productoForm">
+                <label for="producto">Producto:</label>
+                <input type="text" name="producto" id="producto">
+                <br>
+                <label for="cantidad">Cantidad</label>
+                <input type="number" name="cantidad" id="cantidad">
+                <br>
+                <label for="precio">Precio</label>
+                <input type="number" name="precio" id="precio">
+
+                <input id="submit" type="submit" value="Submit">
+
+                <h2 id="price">Precio:</h2>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('productoForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe y recargue la página
+
+            // Obtener los valores de los campos
+            const producto = document.getElementById('producto').value.trim();
+            const cantidad = parseFloat(document.getElementById('cantidad').value);
+            const precio = parseFloat(document.getElementById('precio').value);
+
+            // Validar los datos ingresados
+            if (producto === '') {
+                alert('Por favor, ingresa el nombre del producto.');
+                return;
+            }
+            if (isNaN(cantidad) || cantidad <= 0) {
+                alert('Por favor, ingresa una cantidad válida.');
+                return;
+            }
+            if (isNaN(precio) || precio < 0) {
+                alert('Por favor, ingresa un precio válido.');
+                return;
+            }
+
+            // Calcular el precio total
+            const precioTotal = cantidad * precio;
+
+            // Actualizar el elemento con id "price"
+            document.getElementById('price').textContent = `Total de ${producto}: ${precioTotal.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>
